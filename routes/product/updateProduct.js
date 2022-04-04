@@ -1,3 +1,4 @@
+import Product from "../../models/Product.js";
 const updateProduct = async(req,res)=>{
     try {
         const updatedProduct = new Product.findByIdAndUpdate(req.params.id,{

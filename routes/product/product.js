@@ -1,6 +1,4 @@
-import { Router } from "express";
-
- 
+import { Router } from "express"; 
 import verifyTokenAndAdmin from "../user/verifyTokenAndAdmin.js";
 import createNewProduct from "./CreateNewProduct.js";
 import deleteProduct from "./deleteProduct.js";
