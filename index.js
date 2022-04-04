@@ -5,6 +5,7 @@ import cluster from 'cluster'
 import { catchError, from } from 'rxjs'
 import UserRoutes from './routes/user/user.js'
 import AuthRoutes from './routes/auth/auth.js'
+import productRoutes from './routes/product/product.js'
 import cors from 'cors'
  
  
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use(cors());
 app.use("/api/auth", AuthRoutes); 
 app.use("/api/users", UserRoutes);
+app.use("/api/products",productRoutes)
 
 
 
