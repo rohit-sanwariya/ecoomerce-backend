@@ -4,6 +4,7 @@ import createNewProduct from "./CreateNewProduct.js";
 import deleteProduct from "./deleteProduct.js";
 import getAllProducts from "./getAllProduct.js";
 import getProduct from "./getProduct.js";
+import getProductsFromIds from "./getProductsFromIds.js";
 import updateProduct from "./updateProduct.js";
  
 
@@ -22,6 +23,10 @@ router.delete("/:id",verifyTokenAndAdmin,deleteProduct)
 
 //get product
 router.get('/find/:id',getProduct)
+
+
+//get product by id
+router.get('/findbyIds/:ids',getProductsFromIds)
 
 //get product
 router.get('/',getAllProducts)

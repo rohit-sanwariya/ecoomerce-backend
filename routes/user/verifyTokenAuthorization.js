@@ -3,12 +3,10 @@ import verifyToken from './verifyToken.js'
 
 const verifyTOkenAuthorization = (req,res,next) =>{
      
-    verifyToken(req,res,()=>{
-
-        console.log('veriyf only',req.body);
+    verifyToken(req,res,()=>{   
         
-        if(req.user.id===req.params.id || req.user.isAdmin){
-            console.log('line 11 ',req.body,req.user);
+        if(req.user.id===req.params.id|| req.user.id===req.params.userId || req.user.isAdmin){
+            
             next()
         }
         else{

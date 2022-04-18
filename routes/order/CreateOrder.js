@@ -1,6 +1,7 @@
 import Order from '../../models/Order.js'
 
 const createNewOrder = async (req,res)=>{
+    console.log(req.body);
     const newOrder = new Order(req.body)
     try {
         const savedOrder = await newOrder.save();

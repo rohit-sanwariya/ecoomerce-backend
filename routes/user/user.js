@@ -3,6 +3,7 @@ import verifyTOkenAuthorization from "./verifyTokenAuthorization.js";
 import AES from 'crypto-js/aes.js'
 import User from "../../models/User.js";
 import verifyTokenAndAdmin from "./verifyTokenAndAdmin.js";
+import verifyToken from "./verifyToken.js";
  
 
 
@@ -10,22 +11,22 @@ const router = Router()
 
  
 router.put("/:id",verifyTOkenAuthorization,async (req,res)=>{
-    console.log('line 12',req.body)
+    
     if(!req.body.password){
             req.body.password = AES.encrypt(
                 req.body.password,
                 process.env.PASSWORD_SECRET_KEY
             ).toString()
-            console.log(req.body.password);
+            
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id,{
             $set:req.body
         },{new:true});
-            console.log(updatedUser);
+            
         res.status(200).send(updatedUser);
         
     } catch (error) {
-        console.log('error');
+        
         res.status(500).json(error)
     }
     }
@@ -34,7 +35,7 @@ router.put("/:id",verifyTOkenAuthorization,async (req,res)=>{
 //delete
 router.delete("/:id",verifyTOkenAuthorization,async(req,res)=>{
     try {
-        User.findByIdAndDelete(req.params.id)
+       await User.findByIdAndDelete(req.params.id)
         res.status(200).json("User has been deleted");
     } catch (error) {
         res.status(500).json(error);
@@ -57,12 +58,24 @@ router.get("/",verifyTokenAndAdmin,async(req,res)=>{
     try {
         const users =await User.find();
          
-        console.log(users);
+        
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json(error);
     }
 })
+
+router.get("/single",verifyToken,async(req,res)=>{
+    try {
+          const userFound = await User.findOne({_id:req.user.id})
+          
+        res.status(200).json(userFound);
+    } catch (error) {
+        
+        res.status(500).json(error);
+    }
+})
+
  
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
     const date = new Date();

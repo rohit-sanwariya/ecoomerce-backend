@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import Order from '../../models/Order.js'
 import verifyToken from "../user/verifyToken.js";
 import verifyTokenAndAdmin from "../user/verifyTokenAndAdmin.js";
@@ -7,7 +6,7 @@ import verifyTOkenAuthorization from "../user/verifyTokenAuthorization.js";
 import createNewOrder from "./CreateOrder.js";
 import deleteOrder from "./deleteOrder.js";
 import getAllOrders from "./getAllOrder.js";
-
+import getAllOrdersForUser from "./getAllOrdersForUser.js";
 import getOrder from "./getOrder.js";
 import updateOrder from "./updateOrder.js";
 const router = Router();
@@ -24,6 +23,9 @@ router.delete("/:id", verifyTokenAndAdmin, deleteOrder)
 
 //get Order
 router.get("/find/:userId", verifyTOkenAuthorization, getOrder)
+
+//get All Orders For User
+router.get("/findAll/:userId", verifyTOkenAuthorization, getAllOrdersForUser)
 
 //for admin to get all Order
 router.get("/", verifyTokenAndAdmin, getAllOrders)
