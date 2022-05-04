@@ -12,7 +12,7 @@ const AddressShema = mongoose.Schema(
       {
         country: {
           type: String,
-          required: true,
+          required: true, 
         },
         fullname: {
           type: String,
@@ -27,6 +27,10 @@ const AddressShema = mongoose.Schema(
                 type: String,
                 required: true,
               },
+              state: {
+                type: String,
+                required: true,
+              },
               zip: {
                 type: String,
                 required: true,
@@ -34,7 +38,13 @@ const AddressShema = mongoose.Schema(
               phone: {
                 type: Number,
                 required: true,
+                
               },
+              isDefault:{
+                type:Boolean,
+                required:true,
+                default:false
+              }
                     
       },
     ],

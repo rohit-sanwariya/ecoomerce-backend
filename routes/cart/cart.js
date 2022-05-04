@@ -13,7 +13,7 @@ const router = Router();
 
 
 //create cart
-router.post('/',verifyToken,createNewCart)
+router.post('/',verifyToken,createNewCart) 
 
 //update cart
 router.put("/:id",verifyTOkenAuthorization,updateCart);
@@ -24,7 +24,7 @@ router.put("/removeProduct/:id",verifyTOkenAuthorization,removeProductFromCart);
 router.delete("/:id",verifyTOkenAuthorization,deleteCart)
 
 //get Cart
-router.get("/find/:userId",verifyToken,getCart)
+router.get("/find/:userId",verifyToken,getCart) 
 
 //for admin to get all cart
 router.get("/",verifyTokenAndAdmin,getAllCarts)

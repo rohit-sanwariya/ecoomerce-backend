@@ -1,6 +1,7 @@
 import Cart from "../../models/Cart.js";
 
 const updateCart = async(req,res)=>{
+    console.log('updating cart');
     try {               
         const updatedCart = await Cart.findByIdAndUpdate(req.body._id,{
             $set:req.body

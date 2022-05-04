@@ -10,6 +10,7 @@ const router = Router()
 router.post('/:id',verifyToken,async (req,res)=>{    
   console.log(req.body);  
   const address = new Address(req.body);
+  console.log(address);
 
     try {
       const savedCart =   await address.save()
@@ -38,12 +39,14 @@ router.get('/:id',verifyToken,async (req,res)=>{
 
 
 router.put('/:id',verifyTOkenAuthorization,async(req,res)=>{
-      try {
+ 
+  try {
         const existingAddress =   await Address.findOneAndUpdate(
           {id:req.params.id},
           {$set:req.body}
           );
-        
+          console.log('47',existingAddress);
+        res.status(200).json(existingAddress)
       } 
       catch (error) {
 

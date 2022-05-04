@@ -4,6 +4,7 @@ const getCart = async (req, res) => {
   
   if (!!req.params.userId) {
     try {
+      console.log('cart get ');
       const id = req.params.userId;      
       const getCart = await Cart.findOne({id})      
       res.status(200).json(getCart); 
@@ -15,7 +16,9 @@ const getCart = async (req, res) => {
     }
   }
   else{
-
+    if(res.headersSent){
+      console.log('sendt');
+    }
     res.status(401).json("illformed request")
 
   }

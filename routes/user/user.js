@@ -4,6 +4,9 @@ import AES from 'crypto-js/aes.js'
 import User from "../../models/User.js";
 import verifyTokenAndAdmin from "./verifyTokenAndAdmin.js";
 import verifyToken from "./verifyToken.js";
+import updatePassword from "./updatePassword.js";
+import checkIfUserExists from "./checkIfUserExists.js";
+import forgotPasswordNoAccessToken from "./forgotPasswordUnverified.js";
  
 
 
@@ -11,13 +14,15 @@ const router = Router()
 
  
 router.put("/:id",verifyTOkenAuthorization,async (req,res)=>{
-    
-    if(!req.body.password){
+    console.log('accidental');
+   
+   
+    if(req.body.password){
             req.body.password = AES.encrypt(
                 req.body.password,
                 process.env.PASSWORD_SECRET_KEY
             ).toString()
-            
+             
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id,{
             $set:req.body
@@ -32,6 +37,13 @@ router.put("/:id",verifyTOkenAuthorization,async (req,res)=>{
     }
 })
 
+
+//update user password
+router.put("/updatePassword/:id",verifyTOkenAuthorization, updatePassword )
+
+
+router.put("/forgot/:id", forgotPasswordNoAccessToken )
+
 //delete
 router.delete("/:id",verifyTOkenAuthorization,async(req,res)=>{
     try {
@@ -41,6 +53,10 @@ router.delete("/:id",verifyTOkenAuthorization,async(req,res)=>{
         res.status(500).json(error);
     }
 })
+
+//get User by email
+router.get("/find/:email",checkIfUserExists)
+
 
 
 //get user
